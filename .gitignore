@@ -1,0 +1,49 @@
+# IDE 配置
+.idea/
+*.iws
+*.iml
+*.ipr
+.vscode/
+*.swp
+*.swo
+*~
+
+# 操作系统
+.DS_Store
+Thumbs.db
+
+# 日志文件
+*.log
+logs/
+
+# 后端构建产物
+osprey_be/target/
+osprey_be/build/
+osprey_be/.mvn/wrapper/maven-wrapper.jar
+
+# 前端构建产物
+osprey_fe/node_modules/
+osprey_fe/dist/
+osprey_fe/dist-ssr/
+osprey_fe/*.local
+osprey_fe/package-lock.json
+osprey_fe/pnpm-lock.yaml
+osprey_fe/yarn.lock
+
+# 前端其他
+osprey_fe/dist.rar
+osprey_fe/coverage/
+
+# Docker
+*.tar.gz
+
+# 临时文件
+*.tmp
+*.bak
+*.cache
+
+# 数据库
+*.db
+*.sqlite
+*.sqlite3
+/token

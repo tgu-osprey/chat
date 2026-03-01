@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.anonymouschat.mapper.TalkingMessageMapper">
+
+    <insert id="addTalkingMessageList">
+        insert into talking_message (message, user_name, uuid, time, time_string)values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.message}, #{item.userName}, #{item.uuid}, #{item.time}, #{item.timeString})
+        </foreach>
+    </insert>
+
+    <select id="getTalkingMessageList" resultType="com.example.anonymouschat.pojo.sql.TalkingMessage">
+        select * from talking_message;
+    </select>
+
+    <select id="getMessageByTimeString" resultType="com.example.anonymouschat.pojo.sql.TalkingMessage">
+        select * from talking_message
+        where time_string &lt; #{timeString}
+        order by time_string DESC
+        limit 100;
+    </select>
+
+</mapper>

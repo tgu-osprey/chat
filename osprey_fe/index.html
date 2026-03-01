@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/index.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鱼鹰聊天</title>
+    <!-- Primary Meta Tags -->
+<meta name="title" content="鱼鹰聊天" />
+<meta name="description" content="这是一个绿色聊天室，真的很绿" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://chat.haaland.top/" />
+<meta property="og:title" content="鱼鹰聊天" />
+<meta property="og:description" content="这是一个绿色聊天室，真的很绿" />
+<meta property="og:image" content="http://chat.haaland.top/index.svg" />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content="http://chat.haaland.top/" />
+<meta property="twitter:title" content="鱼鹰聊天" />
+<meta property="twitter:description" content="这是一个绿色聊天室，真的很绿" />
+<meta property="twitter:image" content="http://chat.haaland.top/index.svg" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+  <style>
+    body {
+        /* 加载背景图 */
+        background-image: url(background-icon.svg);
+        /* 背景图垂直、水平均居中 */
+        background-position: center center;
+        /* 背景图不平铺 */
+        background-repeat: no-repeat;
+        background-size: 50%;
+        /* 当内容高度大于图片高度时，背景图像的位置相对于viewport固定 */
+        background-attachment: fixed;
+        /* 让背景图基于容器大小伸缩 */
+        /* background-size: cover; */
+        /* 设置背景颜色，背景图加载过程中会显示背景色 */
+        background-color: #e8f5ff;
+    }
+  </style>
+</html>

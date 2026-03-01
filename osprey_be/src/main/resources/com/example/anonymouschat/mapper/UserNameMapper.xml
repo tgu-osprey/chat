@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.anonymouschat.mapper.UserNameMapper">
+
+    <select id="getUserNameByRandomName" resultType="com.example.anonymouschat.pojo.sql.UserName">
+        select * from user_name where random_name = #{userName};
+    </select>
+
+    <insert id="addUserName">
+        insert into user_name (random_name, status, uuid, abandon_time) values (#{randomName},#{status},#{uuid},#{abandonTime});
+    </insert>
+
+    <update id="updateUserNameStatus">
+        update user_name set status = #{status} , abandon_time = #{abandonTime} where uuid = #{uuid};
+    </update>
+
+    <select id="getUserNameByUuid" resultType="com.example.anonymouschat.pojo.sql.UserName">
+        select * from user_name where uuid = #{uuid};
+    </select>
+
+</mapper>
