@@ -51,7 +51,7 @@
 ### Docker一键部署
 
 ``` docker
-docker run -d -p 5173:5173 -p 9079:9079 --name ospreychat ospreychat:latest
+docker run -d -p 5173:5173 -p 9079:9079 --name ospreychat tgubbober/ospreychat:latest
 ```
 
 ### 前端运行
