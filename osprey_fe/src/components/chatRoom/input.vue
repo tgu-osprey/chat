@@ -20,9 +20,17 @@
 import { defineEmits, onMounted, reactive, ref } from 'vue';
 import SkillBag from './skill/SkillBag.vue';
 import aMentions from 'ant-design-vue/es/mentions';
+import pinia from '@/stores'
+import { chatLineArray } from '@/stores/chat'
+
+// 获取香蕉皮状态
+const chatStore = chatLineArray(pinia)
 
 // 展示技能包
 const showSkillBag = ref(false);
+
+//🍌 本地香蕉皮模式（不依赖后端）
+const localBananaMode = ref(false)
 
 const emit = defineEmits(['child-click'])
 
@@ -97,9 +105,30 @@ const sendMessage = () => {
   flag = 0;
   if (data.message == '') return
 
-  console.log(data.message)
+  let messageToSend = data.message
 
-  emit('child-click', data.message)
+  //🍌 检测"香蕉皮"
+  if (messageToSend.includes('香蕉皮')) {
+    localBananaMode.value = true
+    // 发送系统提示（本地显示）
+    chatStore.chatArray.data.push({
+      userName: '系统',
+      msg: '🍌 检测到香蕉皮！下条消息将被倒序~',
+      time: Date.now(),
+      isSystem: true
+    })
+  }
+  //🍌 如果处于香蕉皮模式，倒序消息
+  else if (localBananaMode.value) {
+    messageToSend = messageToSend.split('').reverse().join('')
+    localBananaMode.value = false
+    // 添加倒序标记
+    messageToSend = '[倒序] ' + messageToSend
+  }
+
+  console.log('发送消息:', messageToSend)
+
+  emit('child-click', messageToSend)
   setTimeout(() => {
     data.message = ''
   }, 10)

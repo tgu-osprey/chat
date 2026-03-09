@@ -7,12 +7,13 @@ import { Modal, message } from 'ant-design-vue'
 import router from '@/router'
 const userStore = userInformation(pinia)
 const wsBaseUrl = window.location.host
+const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
 let socket = null // 持久保存本地状态化
 let sendCount = 0
 // 这里是webstrom工厂类，用于快速创建webstorm,调用这个库然后返回一个带有
 export const createWs = (userID) => {
   userStore.username = userID
-  socket = new WebSocket(`ws://${wsBaseUrl}/ws/` + userID)
+  socket = new WebSocket(`${wsProtocol}//${wsBaseUrl}/ws/` + userID)
   socket.onopen = (data) => { // 建立成功回调
     console.log('Socket挂载成功')
   }
