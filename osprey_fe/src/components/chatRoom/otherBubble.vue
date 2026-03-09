@@ -43,7 +43,7 @@ const playAudio = () => {
 }
 
 const feishu = ref(null)
-const feishuSound = ref("http://mc.haaland.top:5244/d/local/files_trusteeship/feishu.MP3")
+const feishuSound = ref("/feishu.MP3")
 const playFeishu = () => {
   feishu.value.play()
 }
