@@ -1,14 +1,15 @@
 <template>
-    <div class="myBubble">
+    <div class="myBubble" :class="{ 'banana-mode': props.reversed }">
         <div class="context">
             <div>
                 <div class="username">
                     {{ props.userName }}
+                    <span v-if="props.reversed" class="banana-badge">🍌</span>
                 </div>
             </div>
 
             <div>
-                <div class="bubble">
+                <div class="bubble" :class="{ 'reversed-bubble': props.reversed }">
                     {{ props.msg }}
                 </div>
             </div>
@@ -22,6 +23,7 @@
 const props = defineProps({
     userName: String,
     msg: String,
+    reversed: Boolean,
 })
 
 </script>
@@ -82,5 +84,29 @@ const props = defineProps({
             }
         }
     }
+}
+
+//🍌 香蕉皮特效
+.banana-mode {
+    animation: bananaShake 0.5s ease-in-out;
+}
+
+.banana-badge {
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.reversed-bubble {
+    background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%) !important;
+    color: #2d3436 !important;
+    border: 2px solid #e17055 !important;
+    font-style: italic;
+}
+
+@keyframes bananaShake {
+    0%, 100% { transform: translateX(0) rotate(0deg); }
+    25% { transform: translateX(-3px) rotate(-2deg); }
+    50% { transform: translateX(3px) rotate(2deg); }
+    75% { transform: translateX(-3px) rotate(-1deg); }
 }
 </style>

@@ -3,11 +3,18 @@
         <div class="dialogueOut" id="dialogueOut" ref="dialog">
             <div class="dialogueBubble" v-for="(index, key) in socketLineStore.data" :key="key">
                 <div class="time-show" v-if="timeCompute(key)">{{timestampToString(index.time)}}</div>
-                <MyBubble :userName="index.userName" :msg="index.msg" v-if="index.userName == cache.local.get('username')">
-                </MyBubble>
-                <OtherBubble :userName="index.userName" :msg="index.msg" :option="index.option"
-                    v-if="index.userName != cache.local.get('username')">
-                </OtherBubble>
+                <!-- 🍌 系统消息 -->
+                <div class="system-message" v-if="index.isSystem">
+                    {{ index.msg }}
+                </div>
+                <!-- 普通消息 -->
+                <template v-else>
+                    <MyBubble :userName="index.userName" :msg="index.msg" :reversed="isReversedMsg(index.msg)" v-if="index.userName == cache.local.get('username')">
+                    </MyBubble>
+                    <OtherBubble :userName="index.userName" :msg="cleanReversedMark(index.msg)" :option="index.option" :reversed="isReversedMsg(index.msg)"
+                        v-if="index.userName != cache.local.get('username')">
+                    </OtherBubble>
+                </template>
             </div>
             <!-- <div style="height: 5rem"></div> -->
         </div>
@@ -129,6 +136,19 @@ const timeCompute = (index) => {
     return false
   }
 }
+
+//🍌 检查是否是倒序消息
+const isReversedMsg = (msg) => {
+  return msg && msg.startsWith('[倒序] ')
+}
+
+//🍌 清除倒序标记（用于显示）
+const cleanReversedMark = (msg) => {
+  if (msg && msg.startsWith('[倒序] ')) {
+    return msg.substring(6) // 去掉 '[倒序] ' 前缀
+  }
+  return msg
+}
 </script>
 
 <style scoped lang="scss">
@@ -194,5 +214,24 @@ const timeCompute = (index) => {
     color: #999999;
     margin-top: 1rem;
     // margin-bottom: 0.3rem;
+}
+
+//🍌 系统消息样式
+.system-message {
+    text-align: center;
+    font-size: 14px;
+    color: #e17055;
+    background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+    padding: 8px 16px;
+    border-radius: 20px;
+    display: inline-block;
+    margin: 10px auto;
+    animation: bananaPop 0.5s ease-out;
+}
+
+@keyframes bananaPop {
+    0% { transform: scale(0.8); opacity: 0; }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
 }
 </style>
